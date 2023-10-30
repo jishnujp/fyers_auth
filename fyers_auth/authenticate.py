@@ -35,6 +35,14 @@ class Auth:
     PIN_VALIDATION_URL = "https://api-t2.fyers.in/vagator/v2/verify_pin"
     DEFAULT_REDIRECT_URI = "https://trade.fyers.in/api-login/redirect-uri/index.html"
      
+    __instance = None
+    
+    def __new__(cls, *args, **kwargs):
+            
+            if Auth.__instance is None:
+                Auth.__instance = super().__new__(cls)
+            return Auth.__instance 
+     
     def __init__(self,fyers_id,  app_id, app_id_hash, totp_key, pin, redis_client,
                      app_type="100", app_id_type="2", redirect_uri=None, **kwargs):
                 
